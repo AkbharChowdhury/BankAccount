@@ -1,20 +1,6 @@
-import babel.numbers as babel
-from decimal import Decimal
-from colorama import init as colorama_init
 from colorama import Fore
-from colorama import Style
-
-colorama_init()
-
-
-class Helper:
-    @staticmethod
-    def format_currency(amount):
-        return babel.format_currency(Decimal(str(amount)), "GBP")
-
-
-def text_colour(color, text):
-    print(f'{color}{text}{Style.RESET_ALL}')
+from helper import Helper
+from helper import text_colour
 
 
 class BankAccount:
@@ -41,7 +27,7 @@ class BankAccount:
         return True
 
     def show_balance(self):
-        return Helper.format_currency(self.__balance)
+        text_colour(BankAccount.__DEFAULT_COLOUR, Helper.format_currency(self.__balance))
 
     def __str__(self):
         return f'{self.name}: {self.__balance}'
